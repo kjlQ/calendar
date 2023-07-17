@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const Input = styled.input<{ type: string }>`
+export const Input = styled.input<{ type: string; width: string; height: string }>`
   background-image: ${(props) =>
     props.type === "text" ? "linear-gradient(#20aee3, #20aee3), linear-gradient(#bfbfbf, #bfbfbf);" : "0"};
   border: 0 none;
@@ -14,17 +14,23 @@ export const Input = styled.input<{ type: string }>`
   padding: 0;
   transition: background 0s ease-out 0s;
   color: #bfbfbf;
-  min-height: 35px;
+  height: ${(props) => props.height};
   display: initial;
-  width: ${(props) => (props.type === "text" ? "100%" : "30%")};
+  width: ${(props) => props.width};
   outline: none;
   font-size: 15px;
+  margin-bottom: 5px;
   &:focus {
     background-size: 100% 2px, 100% 1px;
     outline: 0 none;
     transition-duration: 0.3s;
     color: #525252;
   }
+`;
+
+export const InputsList = styled.div`
+  display: flex;
+  flex-direction: column;
 `;
 
 export const CalendarContainer = styled.div`
@@ -81,6 +87,10 @@ export const TaskColor = styled.div<{ color: string }>`
   background-color: ${(props) => props.color};
 `;
 
+export const Label = styled.div`
+  display: block;
+`;
+
 export const CalendarDataCount = styled.div`
   display: flex;
   align-items: center;
@@ -94,9 +104,10 @@ export const CalendarBody = styled.div`
   background-color: #fff;
 `;
 
-export const AddLabel = styled.div`
+export const CellAction = styled.div`
   opacity: 0;
   background-color: #222;
+  fill: white;
   color: white;
   width: 20px;
   height: 20px;
@@ -109,7 +120,16 @@ export const AddLabel = styled.div`
   &:hover {
     background-color: #ffa500;
     color: #222;
+    fill: #222;
   }
+  & svg {
+    width: 10px;
+  }
+`;
+
+export const CellActions = styled.div`
+  display: flex;
+  gap: 5px;
 `;
 
 export const Task = styled.div<{ $disabled?: boolean }>`
@@ -139,7 +159,7 @@ export const CalendarDay = styled.div<{ isCurrentMonth: boolean }>`
   padding: 0 5px 5px;
   background-color: ${({ isCurrentMonth }) => (isCurrentMonth ? "#EFEFFF" : "#ccc")};
   color: ${({ isCurrentMonth }) => (isCurrentMonth ? "#000" : "#777")};
-  &:hover ${AddLabel} {
+  &:hover ${CellAction} {
     opacity: 1;
   }
   & .droppable {
@@ -173,4 +193,8 @@ export const PopUpContent = styled.div`
   padding: 30px 20px 20px;
   border-radius: 5px;
   position: relative;
+`;
+
+export const ThemedSelect = styled.div`
+  width: 200px;
 `;
